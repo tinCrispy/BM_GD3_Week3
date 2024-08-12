@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float strafeSpeed;
     public float moveSpeed;
     public float horizontalInput;
+    public float verticalInput;
     public int xRange = 18;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
 
-        transform.Translate(moveSpeed * Time.deltaTime * horizontalInput,0,0);
+        transform.Translate(Vector3.right * horizontalInput * strafeSpeed * Time.deltaTime);
 
         if (transform.position.x <= -xRange)
         {
@@ -29,6 +32,20 @@ public class PlayerMovement : MonoBehaviour
         if (transform.position.x >= xRange)
         {
             transform.position = new Vector3(xRange, transform.position.y,transform.position.z);
+        }
+
+        verticalInput = Input.GetAxis("Vertical");
+
+        transform.Translate(Vector3.forward * verticalInput * moveSpeed * Time.deltaTime);
+
+        if(transform.position.z >= 16)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 16);
+        }
+
+        if (transform.position.z <= 13)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 13);
         }
     }
 }
