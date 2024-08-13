@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
     public int xRange = 18;
-    
+    public GameObject projectile;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
 
-        transform.Translate(Vector3.right * horizontalInput * strafeSpeed * Time.deltaTime);
+        transform.Translate(Vector3.right * -horizontalInput * strafeSpeed * Time.deltaTime);
 
         if (transform.position.x <= -xRange)
         {
@@ -36,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
         verticalInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.forward * verticalInput * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * -verticalInput * moveSpeed * Time.deltaTime);
 
         if(transform.position.z >= 16)
         {
@@ -46,6 +47,12 @@ public class PlayerMovement : MonoBehaviour
         if (transform.position.z <= 13)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 13);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+            Instantiate(projectile, transform.position + new Vector3(0,1,0), projectile.transform.rotation);
         }
     }
 }
