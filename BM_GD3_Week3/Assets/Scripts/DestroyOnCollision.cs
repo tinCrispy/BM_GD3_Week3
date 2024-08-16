@@ -21,6 +21,7 @@ public class DestroyOnCollision : MonoBehaviour
         if (collision.transform.tag == "food")
         {
             Destroy(collision.gameObject, 1);
+            GameObject.FindObjectOfType<ScoreManager>().GameOver();
         }
     }
 }

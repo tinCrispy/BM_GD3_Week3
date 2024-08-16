@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileMove : MonoBehaviour
 {
     public float projectileSpeed;
+    public float rotationSpeed = 360;
 
 
     // Start is called before the first frame update
@@ -17,6 +18,9 @@ public class ProjectileMove : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.back * projectileSpeed * Time.deltaTime, Space.World);
+        transform.Rotate(Random.Range(-rotationSpeed, rotationSpeed) * Time.deltaTime, 
+                         Random.Range(-rotationSpeed, rotationSpeed) * Time.deltaTime, 
+                         Random.Range(-rotationSpeed, rotationSpeed) * Time.deltaTime);
 
     }
 
@@ -24,8 +28,8 @@ public class ProjectileMove : MonoBehaviour
     {
         if (collision.transform.tag == "animal")
         {
-            Destroy(gameObject, 1);
-            Destroy(collision.gameObject, 1);
+            Destroy(gameObject, 0);
+            collision.transform.GetComponent<EnemyMove>().health -= 1;
         }
     }
 }

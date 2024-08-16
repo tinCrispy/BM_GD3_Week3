@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
+    public int health;
     public float moveSpeed;
     // Start is called before the first frame update
     void Start()
@@ -21,5 +22,12 @@ public class EnemyMove : MonoBehaviour
         {
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 1);
         }
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
+       
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
     public int xRange = 18;
-    public GameObject projectile;
+    public GameObject[] projectile;
 
 
     // Start is called before the first frame update
@@ -51,8 +52,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            int ProjectileIndex = Random.Range(0, projectile.Length);
+            Instantiate(projectile[ProjectileIndex], transform.position + new Vector3(0, 1, 0), projectile[ProjectileIndex].transform.rotation);
 
-            Instantiate(projectile, transform.position + new Vector3(0,1,0), projectile.transform.rotation);
         }
+
+        
     }
+
 }
